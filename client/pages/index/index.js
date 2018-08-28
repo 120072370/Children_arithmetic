@@ -7,17 +7,18 @@ Page({
     data: {
         userInfo: {},
         logged: false,
+        firstlogged: false,
         takeSession: false,
         requestResult: '',
         routers: [
             {
-                name: '加法练习',
+                name: '加法练习(开发中)',
                 url: '/pages/take/take',
                 icon: '/image/zan.jpeg',
                 codeID: '0'
             },
             {
-                name: '减法练习',
+                name: '减法练习(开发中)',
                 url: '/pages/take/take',
                 icon: '/image/zan.jpeg',
                 codeID: '1'
@@ -29,34 +30,34 @@ Page({
                 codeID: '2'
             },
             {
-                name: '除法练习',
+                name: '除法练习(开发中)',
                 icon: '/image/zan.jpeg',
                 codeID: '3'
             },
             {
-                name: 'Python',
+                name: '加乘练习(开发中)',
                 url: '/pages/Course/course',
                 icon: '/image/zan.jpeg',
                 codeID: '4'
             },
             {
-                name: 'JavaScript',
+                name: '减除练习(开发中)',
                 icon: '/image/zan.jpeg',
                 codeID: '5'
             },
             {
-                name: 'C++',
+                name: 'DouBai666',
                 url: '/pages/Course/course',
                 icon: '/image/zan.jpeg',
                 codeID: '6'
             },
             {
-                name: 'Object-C',
+                name: 'WX<合作联系>QQ',
                 icon: '/image/zan.jpeg',
                 codeID: '7'
             },
             {
-                name: 'QQ:120072370',
+                name: '120072370',
                 url: '/pages/Course/course',
                 icon: '/image/zan.jpeg',
                 codeID: '8'
@@ -65,25 +66,39 @@ Page({
 
     },
 
-
     onLoad:function () {
     var that = this;
     that.bindGetUserInfo();
   },
 
   iconTap:function(e){
-        console.log(e);
         if (e.currentTarget.dataset.code == 2) {
             wx.navigateTo({
                   url:e.currentTarget.dataset.url
                 })
+        }else if(e.currentTarget.dataset.code == 6 || e.currentTarget.dataset.code == 7 || e.currentTarget.dataset.code == 8){
+            this.copyTBL(e);
         }else{
             this.answerModal('程序猿小哥哥还在开发中，请耐心等待！');
         }
         
      },
 
-      //还没输入完整提示框
+     //复制内容
+     copyTBL:function(e){
+        var self=this;
+          wx.setClipboardData({
+            data:e.currentTarget.dataset.name,
+            success:function(res){
+                wx.getClipboardData({
+                    success:function(res){
+                     
+                    }
+                })
+            }
+          })  
+  },
+    //还没输入完整提示框
   answerModal:function(content){
        wx.showModal({
                 title: '提示',
@@ -93,14 +108,15 @@ Page({
             })
   },
 
-    // 用户登录示例
+    //用户登录示例
     bindGetUserInfo: function () {
         if (this.data.logged) return
 
         util.showBusy('正在登录')
 
         const session = qcloud.Session.get()
-
+        console.log(session);
+        // if (this.data.firstlogged){
         if (session) {
             // 第二次登录
             // 或者本地已经有登录态
@@ -119,7 +135,7 @@ Page({
             // 首次登录
             qcloud.login({
                 success: res => {
-                    this.setData({ userInfo: res, logged: true })
+                    this.setData({ userInfo: res, logged: true ,firstlogged: true})
                     util.showSuccess('登录成功')
                 },
                 fail: err => {
@@ -128,6 +144,22 @@ Page({
                 }
             })
         }
+
+    },
+
+
+    firstLogin:function(){
+        util.showBusy('正在登录')
+        qcloud.login({
+                success: res => {
+                    this.setData({ userInfo: res, logged: true ,firstlogged: true })
+                    util.showSuccess('登录成功')
+                },
+                fail: err => {
+                    console.error(err)
+                    util.showModel('登录错误', err.message)
+                }
+            })
     },
 
     // 切换是否带有登录态
