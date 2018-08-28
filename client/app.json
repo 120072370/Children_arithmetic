@@ -1,0 +1,24 @@
+
+{
+  "pages": [
+    "pages/index/index",
+    "pages/take/take",
+    "pages/addCgi/addCgi"
+    
+
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#576b95",
+    "navigationBarTitleText": "儿童加减乘除练习题",
+    "navigationBarTextStyle": "#fff"
+  },  
+  
+
+  
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000,
+    "uploadFile": 10000
+  }
+}

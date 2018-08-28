@@ -1,0 +1,19 @@
+
+    <view class="userinfo">
+    <button wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"></button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+
+    <view class="weui-grids">
+        <view class="weui-grid" wx:for="{{routers}}" wx:key="name" wx:for-item="item" >
+                <view  bindtap="iconTap" data-code='{{item.codeID}}' data-url='{{item.url}}' class='weui-grid__bg'>
+                    <view class="weui-grid__icon">
+                        <image src=" {{item.icon}}" mode="scaleToFill" />
+                    </view>
+                    <text class="weui-grid__label">{{item.name}}</text>
+                </view>
+        </view>
+    </view>
+</view>
