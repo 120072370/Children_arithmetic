@@ -49,7 +49,7 @@ Page({
     btnArray:[{"title":"重新开始"},{"title":"下一题"}],
     score:0
   })
-      that.create(100);
+      that.create(1);
   },
 
   onReady:function(){
@@ -380,7 +380,7 @@ getJiesuanStorage:function(histor){
 addScore:function(){
         var that = this;
         that.data.score ++;
-         if (that.data.score > 20 && that.data.score <= 40) {
+         if (that.data.score > 10 && that.data.score <= 40) {
             that.create(10);
           }else if (that.data.score > 40) {
             that.create(100);

@@ -10,6 +10,7 @@ Page({
         firstlogged: false,
         takeSession: false,
         requestResult: '',
+        avataricon: '/image/zan.jpeg',
         routers: [
             {
                 name: '加法练习(开发中)',
@@ -66,13 +67,12 @@ Page({
 
     },
 
-    onLoad:function () {
-    var that = this;
-    that.bindGetUserInfo();
-  },
+
 
   iconTap:function(e){
-        if (e.currentTarget.dataset.code == 2) {
+
+        if (this.data.logged) {
+           if (e.currentTarget.dataset.code == 2) {
             wx.navigateTo({
                   url:e.currentTarget.dataset.url
                 })
@@ -80,8 +80,11 @@ Page({
             this.copyTBL(e);
         }else{
             this.answerModal('程序猿小哥哥还在开发中，请耐心等待！');
-        }
-        
+        } 
+     }else{
+        this.bindGetUserInfo();
+     }
+    
      },
 
      //复制内容
@@ -115,8 +118,6 @@ Page({
         util.showBusy('正在登录')
 
         const session = qcloud.Session.get()
-        console.log(session);
-        // if (this.data.firstlogged){
         if (session) {
             // 第二次登录
             // 或者本地已经有登录态

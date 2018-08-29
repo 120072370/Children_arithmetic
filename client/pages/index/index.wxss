@@ -12,9 +12,13 @@ page{
 }
 
 .userinfo {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.userinfo-button{
+  margin-top: 30px;
 }
 
 .userinfo-avatar {
