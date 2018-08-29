@@ -13,6 +13,11 @@ Page({
     id0:"0",
     num1Array:[{}],
     num2Array:[{}],
+    num3Array:[{}],
+    num4Array:[{}],
+    num5Array:[{}],
+    num6Array:[{}],
+    num7Array:[{}],
     resultArray:[{}],
     numArray:[{ id: 0, name: '0' },
               { id: 1, name: '1' }, 
@@ -24,18 +29,15 @@ Page({
               { id: 7, name: '7' },
               { id: 8, name: '8' },
               { id: 9, name: '9' }],
+
     btnArray:[{}],
-    Array0:[{}],
-    Array1:[{}],
-    Array2:[{}],
+   
     changeNub:0,
     ran:0,
     score:0,
     opportunity:3,
     op:"",
-    array3hide:'',
-    array2hide:'',
-    array1hide:'',
+    arrayhide:'',
     segviewhide:'',
   },
 
@@ -49,7 +51,7 @@ Page({
     btnArray:[{"title":"重新开始"},{"title":"下一题"}],
     score:0
   })
-      that.create(1);
+      that.create(100);
   },
 
   onReady:function(){
@@ -118,101 +120,85 @@ Page({
  
   create:function (nub) {
       var that = this;
-      var num1 = this.getRandomfirst(100);
-      var num2 = this.getRandomsecond(nub);
-      var op = this.getOperator('×');
+      var num1 = this.getRandomfirst(1);
+      var num2 = this.getRandomsecond(10);
+      var num3 = this.getRandomfirst(100);
+      var num4 = this.getRandomsecond(100);
+      var num5 = this.getRandomfirst(100);
+      var num6 = this.getRandomsecond(1000);
+      var num7 = this.getRandomfirst(1000);
+      var op = this.getOperator('+');
       var opTemp = op;
-      var num1Array = that.decomposition(num1);
-      var num2Array = that.decomposition(num2);
-      var Array0 = that.decomposition(that.replaceZero(num2Array)[2]*num1);
-      var Array1 = that.decomposition(that.replaceZero(num2Array)[1]*num1);
-      var Array2 = that.decomposition(that.replaceZero(num2Array)[0]*num1);
-      
-      var array3hide = "letf-three-Group";
-      var array2hide = "letf-array2-Group";
-      var array1hide = "letf-array1-Group";
+
+      var arrayhide = "letf-array1-Group";
       var segviewhide = "segview";
 
-      if (that.HiddenNubEven(num2Array).length <2) {
-          segviewhide = "segview-hide";
-          array3hide = "letf-three-hide";
-      }else{
-          segviewhide = "segview";
-          array3hide = "letf-three-Group";
-      }
 
-      var resultArray;
+      var optarr1 = [num1,op,num2];
+      var optarr2 = [that.getResultsNub(optarr1),op,num3];
+      var optarr3 = [that.getResultsNub(optarr2),op,num4];
+      var optarr4 = [that.getResultsNub(optarr3),op,num5];
+      var optarr5 = [that.getResultsNub(optarr4),op,num6];
+      var optarr6 = [that.getResultsNub(optarr5),op,num7];
+      var resultArray = that.getResultsNub(optarr6);
+  
+    
 
-      if (isNaN(Array0[0])) { 
-            if (isNaN(Array1[1])) {
-                Array0 = Array2;
-                 array1hide = "letf-array1-hide";
-                 array2hide = "letf-array2-hide";
-            }else{
-                Array0 = Array1;
-                Array1 = Array2;
-                array2hide = "letf-array2-hide";
-            }
-          
-      }
-
-      var num2Arrayjoin = num2Array.join("");
-
-      if (op === '×') opTemp = '*';
-      if (op === '÷') opTemp = '/';
-
-      var optarr = [num1,op,num2Arrayjoin];
-
-      resultArray = that.decomposition((that.getResultsNub(optarr)));
-
-
-      that.setHistorData('histor',op,array2hide,array1hide,segviewhide,array3hide,num1Array,num2Array,Array0,Array1,Array2,resultArray);
+      that.setHistorData('histor',arrayhide,op,num1,num2,num3,num4,num5,num6,num7,resultArray);
 
       that.setData({
        op:op,
-    array1hide:array1hide,
-    array2hide:array2hide,
-    array3hide:array3hide, 
-    segviewhide:segviewhide,
-    num1Array:that.HiddenNubOdd(num1Array),
-    num2Array:that.HiddenNubEven(num2Array),
-    Array0:that.HiddenNubOdd(Array0),
-    Array1:that.HiddenNubEven(Array1),
-    Array2:that.HiddenNubOdd(Array2),
-    resultArray:that.HiddenNubEven(resultArray),
+       arrayhide:arrayhide,
+       segviewhide:segviewhide,
+    num1Array:that.HiddenNubOdd(that.decomposition(num1)),
+    num2Array:that.HiddenNubEven(that.decomposition(num2)),
+    num3Array:that.HiddenNubOdd(that.decomposition(num3)),
+    num4Array:that.HiddenNubEven(that.decomposition(num4)),
+    num5Array:that.HiddenNubOdd(that.decomposition(num5)),
+    num6Array:that.HiddenNubEven(that.decomposition(num6)),
+    num7Array:that.HiddenNubOdd(that.decomposition(num7)),
+    resultArray:that.HiddenNubEven(that.decomposition(resultArray))
             })
      
   },
 
 
 
- oneTap:function(e){
+ num1Tap:function(e){
       var that = this;
       that.changeTap(e,"num1Array");
   },
-  oneTaptow:function(e){
+  num2Tap:function(e){
       var that = this;
       that.changeTap(e,"num2Array");
   },
 
-  oneTapresult:function(e){
+  num3Tap:function(e){
       var that = this;
-      that.changeTap(e,"resultArray");
+      that.changeTap(e,"num3Array");
   },
 
-  oneTaptowArray0:function(e){
+  num4Tap:function(e){
       var that = this;
-      that.changeTap(e,"Array0");
+      that.changeTap(e,"num4Array");
   },
 
-  oneTaptowArray1:function(e){
+  num5Tap:function(e){
       var that = this;
-      that.changeTap(e,"Array1");
+      that.changeTap(e,"num5Array");
   },  
 
-  oneTaptowArray2:function(e){
+  num6Tap:function(e){
       var that = this;
-      that.changeTap(e,"Array2");
+      that.changeTap(e,"num6Array");
+  },
+  num7Tap:function(e){
+      var that = this;
+      that.changeTap(e,"num7Array");
+  },
+  resultTap:function(e){
+      var that = this;
+      that.changeTap(e,"resultArray");
   },
 
 
@@ -242,17 +228,16 @@ Page({
        wx.getStorage({
           key:histor,
           success: function(res) {
-           that.setData({
-                  op:res.data.op,
-          array1hide:res.data.array1hide,
-          array2hide:res.data.array2hide,
-          array3hide:res.data.array3hide,
-          segviewhide:res.data.segviewhide,     
+             that.setData({
+               op:res.data.op,
+            arrayhide:res.data.arrayhide,
             num1Array:res.data.num1Array,
             num2Array:res.data.num2Array,
-            Array0:res.data.Array0,
-            Array1:res.data.Array1,
-            Array2:res.data.Array2,
+            num3Array:res.data.num3Array, 
+            num4Array:res.data.num4Array,
+            num5Array:res.data.num5Array,
+            num6Array:res.data.num6Array,
+            num7Array:res.data.num7Array,
             resultArray:res.data.resultArray,
                     })
               } 
@@ -260,22 +245,24 @@ Page({
   },
  
   //缓存历史数据
-  setHistorData:function(histor,op,array2hide,array1hide,segviewhide,array3hide,num1Array,num2Array,Array0,Array1,Array2,resultArray){
+  setHistorData:function(histor,arrayhide,op,num1,num2,num3,num4,num5,num6,num7,resultArray){
+
     var that = this;
     wx.setStorage({
         key: histor,
         data: {
-                 op:op,
-         array1hide:array1hide,
-         array2hide:array2hide,
-         array3hide:array3hide,
-        segviewhide:segviewhide,
-          num1Array:that.HiddenNubOdd(num1Array),
-          num2Array:that.HiddenNubEven(num2Array),
-          Array0:that.HiddenNubOdd(Array0),
-          Array1:that.HiddenNubEven(Array1),
-          Array2:that.HiddenNubOdd(Array2),
-          resultArray:that.HiddenNubEven(resultArray)
+              op:op,
+    arrayhide:arrayhide,
+    num1Array:that.HiddenNubOdd(that.decomposition(num1)),
+    num2Array:that.HiddenNubEven(that.decomposition(num2)),
+    num3Array:that.HiddenNubOdd(that.decomposition(num3)),
+    num4Array:that.HiddenNubEven(that.decomposition(num4)),
+    num5Array:that.HiddenNubOdd(that.decomposition(num5)),
+    num6Array:that.HiddenNubEven(that.decomposition(num6)),
+    num7Array:that.HiddenNubOdd(that.decomposition(num7)),
+    resultArray:that.HiddenNubOdd(that.decomposition(resultArray))
+
+
         }
       })
   },
@@ -283,47 +270,22 @@ Page({
 //结算对比   
 getJiesuanStorage:function(histor){
 
+     
         var that = this;
        wx.getStorage({
           key:histor,
           success: function(res) {
-
-            console.log(res.data.num1Array);
-            console.log(that.data.num1Array);
+  
+            if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num4Array)&& !that.jiesuanRan(that.data.num5Array)&& !that.jiesuanRan(that.data.num6Array)&& !that.jiesuanRan(that.data.num7Array)&& !that.jiesuanRan(that.data.resultArray)) {
+                if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num4Array) == that.jiesuan(res.data.num4Array) && that.jiesuan(that.data.num5Array) == that.jiesuan(res.data.num5Array) && that.jiesuan(that.data.num6Array) == that.jiesuan(res.data.num6Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                  that.addScore();
             
-            if (that.data.num2Array.length == 1) {
-
-          if (!that.jiesuanRan(that.data.num1Array) && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.Array0)){
-            if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.Array0) == that.jiesuan(res.data.Array0)) {
-                that.addScore();
+              }else{
+                  that.modalcnt();
+              }
             }else{
-                that.modalcnt();
-            }
-          }else{
                that.answerModal();
-          }
-      }else if (that.data.num2Array.length == 2) {
- 
-          if (!that.jiesuanRan(that.data.num1Array) && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.Array0) && !that.jiesuanRan(that.data.Array1) && !that.jiesuanRan(that.data.resultArray)){
-            if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.Array0) == that.jiesuan(res.data.Array0) && that.jiesuan(that.data.Array1) == that.jiesuan(res.data.Array1) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
-                that.addScore();
-            }else{
-                that.modalcnt();
             }
-          }else{
-               that.answerModal();
-          }
-      }else if (that.data.num2Array.length == 3) {
-          if (!that.jiesuanRan(that.data.num1Array) && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.Array0) && !that.jiesuanRan(that.data.Array1) && !that.jiesuanRan(that.data.Array2) && !that.jiesuanRan(that.data.resultArray)){
-           if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.Array0) == that.jiesuan(res.data.Array0) && that.jiesuan(that.data.Array1) == that.jiesuan(res.data.Array1)  && that.jiesuan(that.data.Array2) == that.jiesuan(res.data.Array2) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
-              that.addScore();
-            }else{
-                that.modalcnt();
-            }
-          }else{
-               that.answerModal();
-          }
-      }
             that.setData({
               score:that.data.score,
           })

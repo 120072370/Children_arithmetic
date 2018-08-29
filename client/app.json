@@ -1,8 +1,12 @@
 
 {
   "pages": [
-    "pages/index/index",
+    "pages/add/add",
     "pages/take/take",
+    
+    "pages/index/index",
+    
+    
     "pages/addCgi/addCgi"
     
 

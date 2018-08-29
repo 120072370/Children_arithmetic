@@ -49,7 +49,7 @@ Page({
     btnArray:[{"title":"重新开始"},{"title":"下一题"}],
     score:0
   })
-      that.create(1);
+      that.create(1000);
   },
 
   onReady:function(){
@@ -287,10 +287,6 @@ getJiesuanStorage:function(histor){
        wx.getStorage({
           key:histor,
           success: function(res) {
-
-            console.log(res.data.num1Array);
-            console.log(that.data.num1Array);
-            
             if (that.data.num2Array.length == 1) {
 
           if (!that.jiesuanRan(that.data.num1Array) && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.Array0)){
