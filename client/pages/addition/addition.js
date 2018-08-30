@@ -117,7 +117,7 @@ Page({
       var that = this;
       var num1 = this.getRandomfirst(100);
       var num2 = this.getRandomsecond(nub);
-      var op = this.getOperator('×');
+      var op = this.getOperator(')');
       var opTemp = op;
       var num1Array = that.decomposition(num1);
       var num2Array = that.decomposition(num2);

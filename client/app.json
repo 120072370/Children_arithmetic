@@ -1,16 +1,12 @@
 
 {
   "pages": [
+    "pages/addition/addition",
+    
     "pages/index/index",
     "pages/reduction/reduction",
     "pages/add/add",
     "pages/take/take",
-    
-    
-    
-    
-    
-    
     "pages/addCgi/addCgi"
     
 
