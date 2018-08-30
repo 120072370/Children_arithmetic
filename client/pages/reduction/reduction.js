@@ -13,6 +13,11 @@ Page({
     id0:"0",
     num1Array:[{}],
     num2Array:[{}],
+    num3Array:[{}],
+    num4Array:[{}],
+    num5Array:[{}],
+    num6Array:[{}],
+    num7Array:[{}],
     resultArray:[{}],
     numArray:[{ id: 0, name: '0' },
               { id: 1, name: '1' }, 
@@ -23,20 +28,22 @@ Page({
               { id: 6, name: '6' },
               { id: 7, name: '7' },
               { id: 8, name: '8' },
-              { id: 9, name: '9' }],
+              { id: 9, name: '9' },
+              { id: '-', name: '-' },],
+
     btnArray:[{}],
-    Array0:[{}],
-    Array1:[{}],
-    Array2:[{}],
+   
     changeNub:0,
     ran:0,
     score:0,
     opportunity:3,
     op:"",
-    array3hide:'',
     array2hide:'',
-    array1hide:'',
-    segviewhide:'',
+    array3hide:'',
+    array4hide:'',
+    array5hide:'',
+    array6hide:'',
+    nub:'',
   },
 
 
@@ -47,9 +54,9 @@ Page({
     that.setData({
     numArray: that.data.numArray,
     btnArray:[{"title":"重新开始"},{"title":"下一题"}],
-    score:0
+    score:0,
   })
-      that.create(1000);
+      that.create(1);
   },
 
   onReady:function(){
@@ -82,10 +89,7 @@ Page({
               }
             }
           })
-       that.setData({
-          opportunity:3,
-          score:0,
-      })
+       
     }else{
     wx.showModal({
       title: '提示',
@@ -118,101 +122,128 @@ Page({
  
   create:function (nub) {
       var that = this;
-      var num1 = this.getRandomfirst(100);
-      var num2 = this.getRandomsecond(nub);
-      var op = this.getOperator('×');
+      var num1 = this.getRandomfirst(1);
+      var num2 = this.getRandomsecond(10);
+      var num3 = this.getRandomfirst(100);
+      var num4 = this.getRandomsecond(100);
+      var num5 = this.getRandomfirst(100);
+      var num6 = this.getRandomsecond(1000);
+      var num7 = this.getRandomfirst(100);
+      var op = this.getOperator('-');
       var opTemp = op;
-      var num1Array = that.decomposition(num1);
-      var num2Array = that.decomposition(num2);
-      var Array0 = that.decomposition(that.replaceZero(num2Array)[2]*num1);
-      var Array1 = that.decomposition(that.replaceZero(num2Array)[1]*num1);
-      var Array2 = that.decomposition(that.replaceZero(num2Array)[0]*num1);
-      
-      var array3hide = "letf-three-Group";
-      var array2hide = "letf-array2-Group";
-      var array1hide = "letf-array1-Group";
-      var segviewhide = "segview";
 
-      if (that.HiddenNubEven(num2Array).length <2) {
-          segviewhide = "segview-hide";
-          array3hide = "letf-three-hide";
-      }else{
-          segviewhide = "segview";
-          array3hide = "letf-three-Group";
-      }
 
+      var array2hide = "letf-tow-Group";
+      var array3hide = "letf-tow-Group";
+      var array4hide = "letf-tow-Group";
+      var array5hide = "letf-tow-Group";
+      var array6hide = "letf-tow-Group";
+      var optarr1 = [num1,op,num7];
       var resultArray;
-
-      if (isNaN(Array0[0])) { 
-            if (isNaN(Array1[1])) {
-                Array0 = Array2;
-                 array1hide = "letf-array1-hide";
-                 array2hide = "letf-array2-hide";
-            }else{
-                Array0 = Array1;
-                Array1 = Array2;
-                array2hide = "letf-array2-hide";
-            }
-          
+     if (nub == 1 || nub == 2) {
+        array2hide = "letf-tow-hide";
+        array3hide = "letf-tow-hide";
+        array4hide = "letf-tow-hide";
+        array5hide = "letf-tow-hide";
+        array6hide = "letf-tow-hide";
+      resultArray =  that.getResultsNub(optarr1);
+      }else if(nub == 3){
+        array3hide = "letf-tow-hide";
+        array4hide = "letf-tow-hide";
+        array5hide = "letf-tow-hide";
+        array6hide = "letf-tow-hide";
+      var optarr2 = [that.getResultsNub(optarr1),op,num2];
+      resultArray =  that.getResultsNub(optarr2);
+      }else if(nub == 4){
+        array4hide = "letf-tow-hide";
+        array5hide = "letf-tow-hide";
+        array6hide = "letf-tow-hide";
+      var optarr2 = [that.getResultsNub(optarr1),op,num2];
+      var optarr3 = [that.getResultsNub(optarr2),op,num3];
+      resultArray =  that.getResultsNub(optarr3);
+      }else if(nub == 5){
+        array5hide = "letf-tow-hide";
+        array6hide = "letf-tow-hide";
+        var optarr2 = [that.getResultsNub(optarr1),op,num2];
+        var optarr3 = [that.getResultsNub(optarr2),op,num3];
+        var optarr4 = [that.getResultsNub(optarr3),op,num4];
+        resultArray =  that.getResultsNub(optarr4);
+      }else if(nub == 6){
+        array6hide = "letf-tow-hide";
+        var optarr2 = [that.getResultsNub(optarr1),op,num2];
+        var optarr3 = [that.getResultsNub(optarr2),op,num3];
+        var optarr4 = [that.getResultsNub(optarr3),op,num4];
+        var optarr5 = [that.getResultsNub(optarr4),op,num5];
+        resultArray =  that.getResultsNub(optarr5);
+      }else{
+        var optarr2 = [that.getResultsNub(optarr1),op,num2];
+        var optarr3 = [that.getResultsNub(optarr2),op,num3];
+        var optarr4 = [that.getResultsNub(optarr3),op,num4];
+        var optarr5 = [that.getResultsNub(optarr4),op,num5];
+        var optarr6 = [that.getResultsNub(optarr5),op,num6];
+        resultArray =  that.getResultsNub(optarr6);
       }
 
-      var num2Arrayjoin = num2Array.join("");
 
-      if (op === '×') opTemp = '*';
-      if (op === '÷') opTemp = '/';
-
-      var optarr = [num1,op,num2Arrayjoin];
-
-      resultArray = that.decomposition((that.getResultsNub(optarr)));
-
-
-      that.setHistorData('histor',op,array2hide,array1hide,segviewhide,array3hide,num1Array,num2Array,Array0,Array1,Array2,resultArray);
+      that.setHistorData('histor',array2hide,array3hide,array4hide,array5hide,array6hide,op,num1,num2,num3,num4,num5,num6,num7,resultArray,nub);
 
       that.setData({
        op:op,
-    array1hide:array1hide,
-    array2hide:array2hide,
-    array3hide:array3hide, 
-    segviewhide:segviewhide,
-    num1Array:that.HiddenNubOdd(num1Array),
-    num2Array:that.HiddenNubEven(num2Array),
-    Array0:that.HiddenNubOdd(Array0),
-    Array1:that.HiddenNubEven(Array1),
-    Array2:that.HiddenNubOdd(Array2),
-    resultArray:that.HiddenNubEven(resultArray),
+       nub:nub,
+       array2hide:array2hide,
+       array3hide:array3hide,
+       array4hide:array4hide,
+       array5hide:array5hide,
+       array6hide:array6hide,        
+    num1Array:that.HiddenNubOdd(that.decomposition(num1)),
+    num2Array:that.HiddenNubEven(that.decomposition(num2)),
+    num3Array:that.HiddenNubOdd(that.decomposition(num3)),
+    num4Array:that.HiddenNubEven(that.decomposition(num4)),
+    num5Array:that.HiddenNubOdd(that.decomposition(num5)),
+    num6Array:that.HiddenNubEven(that.decomposition(num6)),
+    num7Array:that.HiddenNubOdd(that.decomposition(num7)),
+    resultArray:that.HiddenNubOdd(that.decomposition(resultArray))
             })
      
   },
 
 
 
- oneTap:function(e){
+ num1Tap:function(e){
       var that = this;
       that.changeTap(e,"num1Array");
   },
-  oneTaptow:function(e){
+  num2Tap:function(e){
       var that = this;
       that.changeTap(e,"num2Array");
   },
 
-  oneTapresult:function(e){
+  num3Tap:function(e){
       var that = this;
-      that.changeTap(e,"resultArray");
+      that.changeTap(e,"num3Array");
   },
 
-  oneTaptowArray0:function(e){
+  num4Tap:function(e){
       var that = this;
-      that.changeTap(e,"Array0");
+      that.changeTap(e,"num4Array");
   },
 
-  oneTaptowArray1:function(e){
+  num5Tap:function(e){
       var that = this;
-      that.changeTap(e,"Array1");
+      that.changeTap(e,"num5Array");
   },  
 
-  oneTaptowArray2:function(e){
+  num6Tap:function(e){
       var that = this;
-      that.changeTap(e,"Array2");
+      that.changeTap(e,"num6Array");
+  },
+  num7Tap:function(e){
+      var that = this;
+      that.changeTap(e,"num7Array");
+  },
+  resultTap:function(e){
+      var that = this;
+      that.changeTap(e,"resultArray");
   },
 
 
@@ -232,8 +263,11 @@ Page({
   //重新开始重置数据
   resetdate:function(){
     var that = this;
-    that.data.score = 0;
     that.create(1);
+    that.setData({
+          opportunity:3,
+          score:0,
+      })
   },
 
   //获取历史数据
@@ -242,17 +276,21 @@ Page({
        wx.getStorage({
           key:histor,
           success: function(res) {
-           that.setData({
-                  op:res.data.op,
-          array1hide:res.data.array1hide,
-          array2hide:res.data.array2hide,
-          array3hide:res.data.array3hide,
-          segviewhide:res.data.segviewhide,     
+             that.setData({
+                   op:res.data.op,
+                  nub:res.data.nub,
+           array2hide:res.data.array2hide,
+           array3hide:res.data.array3hide,
+           array4hide:res.data.array4hide,
+           array5hide:res.data.array5hide,
+           array6hide:res.data.array6hide,
             num1Array:res.data.num1Array,
             num2Array:res.data.num2Array,
-            Array0:res.data.Array0,
-            Array1:res.data.Array1,
-            Array2:res.data.Array2,
+            num3Array:res.data.num3Array, 
+            num4Array:res.data.num4Array,
+            num5Array:res.data.num5Array,
+            num6Array:res.data.num6Array,
+            num7Array:res.data.num7Array,
             resultArray:res.data.resultArray,
                     })
               } 
@@ -260,22 +298,28 @@ Page({
   },
  
   //缓存历史数据
-  setHistorData:function(histor,op,array2hide,array1hide,segviewhide,array3hide,num1Array,num2Array,Array0,Array1,Array2,resultArray){
+  setHistorData:function(histor,array2hide,array3hide,array4hide,array5hide,array6hide,op,num1,num2,num3,num4,num5,num6,num7,resultArray,nub){
+
     var that = this;
     wx.setStorage({
         key: histor,
         data: {
-                 op:op,
-         array1hide:array1hide,
-         array2hide:array2hide,
-         array3hide:array3hide,
-        segviewhide:segviewhide,
-          num1Array:that.HiddenNubOdd(num1Array),
-          num2Array:that.HiddenNubEven(num2Array),
-          Array0:that.HiddenNubOdd(Array0),
-          Array1:that.HiddenNubEven(Array1),
-          Array2:that.HiddenNubOdd(Array2),
-          resultArray:that.HiddenNubEven(resultArray)
+              op:op,
+              nub:nub,
+   array2hide:array2hide,
+   array3hide:array3hide,
+   array4hide:array4hide,
+   array5hide:array5hide,
+   array6hide:array6hide,
+    num1Array:that.HiddenNubOdd(that.decomposition(num1)),
+    num2Array:that.HiddenNubEven(that.decomposition(num2)),
+    num3Array:that.HiddenNubOdd(that.decomposition(num3)),
+    num4Array:that.HiddenNubEven(that.decomposition(num4)),
+    num5Array:that.HiddenNubOdd(that.decomposition(num5)),
+    num6Array:that.HiddenNubEven(that.decomposition(num6)),
+    num7Array:that.HiddenNubOdd(that.decomposition(num7)),
+    resultArray:that.HiddenNubOdd(that.decomposition(resultArray))
+
         }
       })
   },
@@ -283,43 +327,73 @@ Page({
 //结算对比   
 getJiesuanStorage:function(histor){
 
+     
         var that = this;
        wx.getStorage({
           key:histor,
           success: function(res) {
-            if (that.data.num2Array.length == 1) {
-
-          if (!that.jiesuanRan(that.data.num1Array) && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.Array0)){
-            if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.Array0) == that.jiesuan(res.data.Array0)) {
-                that.addScore();
+            if (res.data.nub == 2 || res.data.nub == 1) {
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num7Array) && !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
+            }else if(res.data.nub == 3){
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num7Array) && !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
+            }else if(res.data.nub == 4){
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num7Array) && !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
+            }else if(res.data.nub == 5){
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num4Array) && !that.jiesuanRan(that.data.num7Array)&& !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num4Array) == that.jiesuan(res.data.num4Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
+            }else if(res.data.nub == 6){
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num4Array)&& !that.jiesuanRan(that.data.num5Array) && !that.jiesuanRan(that.data.num7Array)&& !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num4Array) == that.jiesuan(res.data.num4Array) && that.jiesuan(that.data.num5Array) == that.jiesuan(res.data.num5Array)  && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
             }else{
-                that.modalcnt();
+                 if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num4Array)&& !that.jiesuanRan(that.data.num5Array)&& !that.jiesuanRan(that.data.num6Array)&& !that.jiesuanRan(that.data.num7Array)&& !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num4Array) == that.jiesuan(res.data.num4Array) && that.jiesuan(that.data.num5Array) == that.jiesuan(res.data.num5Array) && that.jiesuan(that.data.num6Array) == that.jiesuan(res.data.num6Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
             }
-          }else{
-               that.answerModal();
-          }
-      }else if (that.data.num2Array.length == 2) {
- 
-          if (!that.jiesuanRan(that.data.num1Array) && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.Array0) && !that.jiesuanRan(that.data.Array1) && !that.jiesuanRan(that.data.resultArray)){
-            if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.Array0) == that.jiesuan(res.data.Array0) && that.jiesuan(that.data.Array1) == that.jiesuan(res.data.Array1) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
-                that.addScore();
-            }else{
-                that.modalcnt();
-            }
-          }else{
-               that.answerModal();
-          }
-      }else if (that.data.num2Array.length == 3) {
-          if (!that.jiesuanRan(that.data.num1Array) && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.Array0) && !that.jiesuanRan(that.data.Array1) && !that.jiesuanRan(that.data.Array2) && !that.jiesuanRan(that.data.resultArray)){
-           if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.Array0) == that.jiesuan(res.data.Array0) && that.jiesuan(that.data.Array1) == that.jiesuan(res.data.Array1)  && that.jiesuan(that.data.Array2) == that.jiesuan(res.data.Array2) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
-              that.addScore();
-            }else{
-                that.modalcnt();
-            }
-          }else{
-               that.answerModal();
-          }
-      }
+           
             that.setData({
               score:that.data.score,
           })
@@ -380,10 +454,14 @@ getJiesuanStorage:function(histor){
 addScore:function(){
         var that = this;
         that.data.score ++;
-         if (that.data.score > 10 && that.data.score <= 40) {
-            that.create(10);
-          }else if (that.data.score > 40) {
-            that.create(100);
+         if (that.data.score > 5 && that.data.score <= 5) {
+            that.create(3);
+          }else if (that.data.score > 10 && that.data.score <= 10) {
+            that.create(4);
+          }else if (that.data.score > 20 && that.data.score <= 20) {
+            that.create(5);
+          }else if (that.data.score > 20) {
+            that.create(6);
           }else{
             that.create(1);
           }

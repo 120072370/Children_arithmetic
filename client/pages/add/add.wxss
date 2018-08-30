@@ -288,8 +288,8 @@ segview-hide{
 .opview{
     display:flex;
     flex:1;
-    margin-top:1px;
-    margin-left:5px;
+    margin-top:-10px;
+    margin-left:1px;
     color:black;
     justify-content:center;
     font-weight:bold;

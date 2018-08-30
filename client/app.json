@@ -1,10 +1,14 @@
 
 {
   "pages": [
+    "pages/index/index",
+    "pages/reduction/reduction",
     "pages/add/add",
     "pages/take/take",
     
-    "pages/index/index",
+    
+    
+    
     
     
     "pages/addCgi/addCgi"

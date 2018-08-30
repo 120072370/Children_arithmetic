@@ -13,14 +13,14 @@ Page({
         avataricon: '/image/zan.jpeg',
         routers: [
             {
-                name: '加法练习(开发中)',
-                url: '/pages/take/take',
+                name: '加法练习',
+                url: '/pages/add/add',
                 icon: '/image/zan.jpeg',
                 codeID: '0'
             },
             {
-                name: '减法练习(开发中)',
-                url: '/pages/take/take',
+                name: '减法练习',
+                url: '/pages/reduction/reduction',
                 icon: '/image/zan.jpeg',
                 codeID: '1'
             },
@@ -72,7 +72,7 @@ Page({
   iconTap:function(e){
 
         if (this.data.logged) {
-           if (e.currentTarget.dataset.code == 2) {
+           if (e.currentTarget.dataset.code == 2 || e.currentTarget.dataset.code == 1|| e.currentTarget.dataset.code == 0 ) {
             wx.navigateTo({
                   url:e.currentTarget.dataset.url
                 })

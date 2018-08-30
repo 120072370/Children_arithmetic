@@ -82,10 +82,6 @@ Page({
               }
             }
           })
-       that.setData({
-          opportunity:3,
-          score:0,
-      })
     }else{
     wx.showModal({
       title: '提示',
@@ -232,8 +228,11 @@ Page({
   //重新开始重置数据
   resetdate:function(){
     var that = this;
-    that.data.score = 0;
     that.create(1);
+    that.setData({
+          opportunity:3,
+          score:0,
+      })
   },
 
   //获取历史数据
