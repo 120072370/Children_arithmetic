@@ -37,7 +37,11 @@ Page({
     score:0,
     opportunity:3,
     op:"",
-    arrayhide:'',
+    array2hide:'',
+    array3hide:'',
+    array4hide:'',
+    array5hide:'',
+    array6hide:'',
     segviewhide:'',
   },
 
@@ -129,8 +133,12 @@ Page({
       var num7 = this.getRandomfirst(1000);
       var op = this.getOperator('+');
       var opTemp = op;
+      var array2hide = "letf-tow-Group";
+      var array3hide = "letf-tow-Group";
+      var array4hide = "letf-tow-hide";
+      var array5hide = "letf-tow-hide";
+      var array6hide = "letf-tow-hide";
 
-      var arrayhide = "letf-array1-Group";
       var segviewhide = "segview";
 
 
@@ -144,11 +152,15 @@ Page({
   
     
 
-      that.setHistorData('histor',arrayhide,op,num1,num2,num3,num4,num5,num6,num7,resultArray);
+      that.setHistorData('histor',array2hide,array3hide,array4hide,array5hide,array6hide,op,num1,num2,num3,num4,num5,num6,num7,resultArray);
 
       that.setData({
        op:op,
-       arrayhide:arrayhide,
+       array2hide:array2hide,
+       array3hide:array3hide,
+       array4hide:array4hide,
+       array5hide:array5hide,
+       array6hide:array6hide,
        segviewhide:segviewhide,
     num1Array:that.HiddenNubOdd(that.decomposition(num1)),
     num2Array:that.HiddenNubEven(that.decomposition(num2)),
@@ -230,7 +242,11 @@ Page({
           success: function(res) {
              that.setData({
                op:res.data.op,
-            arrayhide:res.data.arrayhide,
+           array2hide:res.data.array2hide,
+           array3hide:res.data.array3hide,
+           array4hide:res.data.array4hide,
+           array5hide:res.data.array5hide,
+           array6hide:res.data.array6hide,
             num1Array:res.data.num1Array,
             num2Array:res.data.num2Array,
             num3Array:res.data.num3Array, 
@@ -245,14 +261,18 @@ Page({
   },
  
   //缓存历史数据
-  setHistorData:function(histor,arrayhide,op,num1,num2,num3,num4,num5,num6,num7,resultArray){
+  setHistorData:function(histor,array2hide,array3hide,array4hide,array5hide,array6hide,op,num1,num2,num3,num4,num5,num6,num7,resultArray){
 
     var that = this;
     wx.setStorage({
         key: histor,
         data: {
               op:op,
-    arrayhide:arrayhide,
+   array2hide:array2hide,
+   array3hide:array3hide,
+   array4hide:array4hide,
+   array5hide:array5hide,
+   array6hide:array6hide,
     num1Array:that.HiddenNubOdd(that.decomposition(num1)),
     num2Array:that.HiddenNubEven(that.decomposition(num2)),
     num3Array:that.HiddenNubOdd(that.decomposition(num3)),
