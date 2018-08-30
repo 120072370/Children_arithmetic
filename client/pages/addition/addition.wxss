@@ -88,6 +88,20 @@ page{
     width:80%;
 }
 
+.denominator{
+    display:flex;
+    margin-top:-55px;
+    flex-direction:row;
+    width:80%;
+}
+
+.denominatortow{
+    display:flex;
+    margin-top:5px;
+    flex-direction:row;
+    width:80%;
+}
+
 .letf-tow-Group{
     display: flex;
     flex-direction: row;
@@ -260,7 +274,7 @@ segview-hide{
 }
 
 .segview{
-    margin-left:-12px;
+    margin-left:-13px;
     width:50%;
     height:7px;
     background-color:black;

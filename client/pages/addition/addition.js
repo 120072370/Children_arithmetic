@@ -12,6 +12,7 @@ Page({
     id1:"1",
     id0:"0",
     numoneArray:[{}],
+    numtowArray:[{}],
     num1Array:[{}],
     num2Array:[{}],
     resultArray:[{}],
@@ -171,8 +172,9 @@ Page({
     array1hide:array1hide,
     array2hide:array2hide,
     array3hide:array3hide, 
-    segviewhide:segviewhide,
+    segviewhide:segviewhide, 
     numoneArray:that.HiddenNubOddOne(num1Array),
+    numtowArray:that.HiddenNubOddtow(num1Array),
     num1Array:that.HiddenNubOdd(num1Array),
     num2Array:that.HiddenNubEven(num2Array),
     Array0:that.HiddenNubOdd(Array0),
@@ -395,6 +397,23 @@ addScore:function(){
 
 HiddenNubOddOne:function(NubArray){
       var lenteNubArray = NubArray.length+1;
+      var arrayNub = [];
+      var index = 0;
+      for (var i = 0; i < lenteNubArray; i++) {
+      var dictNub = {}; 
+      if (i%2==0) {
+        dictNub.ran =1;
+      }else{
+        dictNub.ran =0;
+      }
+      dictNub.nub = NubArray[i];
+      arrayNub.push(dictNub);
+    }
+    return  arrayNub;
+  },
+
+  HiddenNubOddtow:function(NubArray){
+      var lenteNubArray = NubArray.length+2;
       var arrayNub = [];
       var index = 0;
       for (var i = 0; i < lenteNubArray; i++) {

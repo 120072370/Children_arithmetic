@@ -12,10 +12,13 @@
     </view>
 
    <view class="letf-one-Group">
-    <text   class='item-btn-gray gray' wx:for="{{numoneArray}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+    <text   class='item-btn-gray gray' wx:for="{{numtowArray}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
 
      <text  bindtap='num4Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red gray":""}}' wx:for="{{num2Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
     </view>
+
+
+
     
     <view class="additionView">
     <text  bindtap='num4Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red gray":""}}' wx:for="{{num1Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
@@ -23,7 +26,15 @@
     <view class="segview"></view>
    </view>
     
-     <view class="letf-one-Group">
+
+     <view class="denominator">
+     <text   class='item-btn-gray gray' wx:for="{{numoneArray}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+     <text  bindtap='num4Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red gray":""}}' wx:for="{{num1Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+    </view>
+
+
+     <view class="denominatortow">
+     <text   class='item-btn-gray gray' wx:for="{{numoneArray}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
      <text  bindtap='num4Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red gray":""}}' wx:for="{{num1Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
     </view>
 
