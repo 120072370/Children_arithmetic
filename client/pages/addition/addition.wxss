@@ -102,6 +102,14 @@ page{
     width:80%;
 }
 
+
+.denominatortherr{
+    display:flex;
+    margin-top:-38px;
+    flex-direction:row;
+    width:80%;
+}
+
 .letf-tow-Group{
     display: flex;
     flex-direction: row;
