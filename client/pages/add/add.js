@@ -42,7 +42,7 @@ Page({
     array4hide:'',
     array5hide:'',
     array6hide:'',
-    segviewhide:'',
+    nub:'',
   },
 
 
@@ -55,7 +55,7 @@ Page({
     btnArray:[{"title":"重新开始"},{"title":"下一题"}],
     score:0
   })
-      that.create(100);
+      that.create(1);
   },
 
   onReady:function(){
@@ -133,35 +133,70 @@ Page({
       var num7 = this.getRandomfirst(1000);
       var op = this.getOperator('+');
       var opTemp = op;
+
+
       var array2hide = "letf-tow-Group";
       var array3hide = "letf-tow-Group";
-      var array4hide = "letf-tow-hide";
-      var array5hide = "letf-tow-hide";
-      var array6hide = "letf-tow-hide";
+      var array4hide = "letf-tow-Group";
+      var array5hide = "letf-tow-Group";
+      var array6hide = "letf-tow-Group";
+      var optarr1 = [num1,op,num7];
+      var resultArray;
+      if (nub == 2) {
+        array2hide = "letf-tow-hide";
+        array3hide = "letf-tow-hide";
+        array4hide = "letf-tow-hide";
+        array5hide = "letf-tow-hide";
+        array6hide = "letf-tow-hide";
+      resultArray =  that.getResultsNub(optarr1);
+      }else if(nub == 3){
+        array3hide = "letf-tow-hide";
+        array4hide = "letf-tow-hide";
+        array5hide = "letf-tow-hide";
+        array6hide = "letf-tow-hide";
+      var optarr2 = [that.getResultsNub(optarr1),op,num2];
+      resultArray =  that.getResultsNub(optarr2);
+      }else if(nub == 4){
+        array4hide = "letf-tow-hide";
+        array5hide = "letf-tow-hide";
+        array6hide = "letf-tow-hide";
+      var optarr2 = [that.getResultsNub(optarr1),op,num2];
+      var optarr3 = [that.getResultsNub(optarr2),op,num3];
+      resultArray =  that.getResultsNub(optarr3);
+      }else if(nub == 5){
+        array5hide = "letf-tow-hide";
+        array6hide = "letf-tow-hide";
+        var optarr2 = [that.getResultsNub(optarr1),op,num2];
+        var optarr3 = [that.getResultsNub(optarr2),op,num3];
+        var optarr4 = [that.getResultsNub(optarr3),op,num4];
+        resultArray =  that.getResultsNub(optarr4);
+      }else if(nub == 6){
+        array6hide = "letf-tow-hide";
+        var optarr2 = [that.getResultsNub(optarr1),op,num2];
+        var optarr3 = [that.getResultsNub(optarr2),op,num3];
+        var optarr4 = [that.getResultsNub(optarr3),op,num4];
+        var optarr5 = [that.getResultsNub(optarr4),op,num5];
+        resultArray =  that.getResultsNub(optarr5);
+      }else{
+        var optarr2 = [that.getResultsNub(optarr1),op,num2];
+        var optarr3 = [that.getResultsNub(optarr2),op,num3];
+        var optarr4 = [that.getResultsNub(optarr3),op,num4];
+        var optarr5 = [that.getResultsNub(optarr4),op,num5];
+        var optarr6 = [that.getResultsNub(optarr5),op,num6];
+        resultArray =  that.getResultsNub(optarr6);
+      }
 
-      var segviewhide = "segview";
 
-
-      var optarr1 = [num1,op,num2];
-      var optarr2 = [that.getResultsNub(optarr1),op,num3];
-      var optarr3 = [that.getResultsNub(optarr2),op,num4];
-      var optarr4 = [that.getResultsNub(optarr3),op,num5];
-      var optarr5 = [that.getResultsNub(optarr4),op,num6];
-      var optarr6 = [that.getResultsNub(optarr5),op,num7];
-      var resultArray = that.getResultsNub(optarr6);
-  
-    
-
-      that.setHistorData('histor',array2hide,array3hide,array4hide,array5hide,array6hide,op,num1,num2,num3,num4,num5,num6,num7,resultArray);
+      that.setHistorData('histor',array2hide,array3hide,array4hide,array5hide,array6hide,op,num1,num2,num3,num4,num5,num6,num7,resultArray,nub);
 
       that.setData({
        op:op,
+       nub:nub,
        array2hide:array2hide,
        array3hide:array3hide,
        array4hide:array4hide,
        array5hide:array5hide,
-       array6hide:array6hide,
-       segviewhide:segviewhide,
+       array6hide:array6hide,        
     num1Array:that.HiddenNubOdd(that.decomposition(num1)),
     num2Array:that.HiddenNubEven(that.decomposition(num2)),
     num3Array:that.HiddenNubOdd(that.decomposition(num3)),
@@ -241,7 +276,8 @@ Page({
           key:histor,
           success: function(res) {
              that.setData({
-               op:res.data.op,
+                   op:res.data.op,
+                  nub:res.data.nub,
            array2hide:res.data.array2hide,
            array3hide:res.data.array3hide,
            array4hide:res.data.array4hide,
@@ -261,13 +297,14 @@ Page({
   },
  
   //缓存历史数据
-  setHistorData:function(histor,array2hide,array3hide,array4hide,array5hide,array6hide,op,num1,num2,num3,num4,num5,num6,num7,resultArray){
+  setHistorData:function(histor,array2hide,array3hide,array4hide,array5hide,array6hide,op,num1,num2,num3,num4,num5,num6,num7,resultArray,nub){
 
     var that = this;
     wx.setStorage({
         key: histor,
         data: {
               op:op,
+              nub:nub,
    array2hide:array2hide,
    array3hide:array3hide,
    array4hide:array4hide,
@@ -282,7 +319,6 @@ Page({
     num7Array:that.HiddenNubOdd(that.decomposition(num7)),
     resultArray:that.HiddenNubOdd(that.decomposition(resultArray))
 
-
         }
       })
   },
@@ -295,17 +331,68 @@ getJiesuanStorage:function(histor){
        wx.getStorage({
           key:histor,
           success: function(res) {
-  
-            if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num4Array)&& !that.jiesuanRan(that.data.num5Array)&& !that.jiesuanRan(that.data.num6Array)&& !that.jiesuanRan(that.data.num7Array)&& !that.jiesuanRan(that.data.resultArray)) {
-                if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num4Array) == that.jiesuan(res.data.num4Array) && that.jiesuan(that.data.num5Array) == that.jiesuan(res.data.num5Array) && that.jiesuan(that.data.num6Array) == that.jiesuan(res.data.num6Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
-                  that.addScore();
-            
+            if (res.data.nub == 2) {
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num7Array) && !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
               }else{
-                  that.modalcnt();
+                 that.answerModal();
+              }
+            }else if(res.data.nub == 3){
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num7Array) && !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
+            }else if(res.data.nub == 4){
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num7Array) && !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
+            }else if(res.data.nub == 5){
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num4Array) && !that.jiesuanRan(that.data.num7Array)&& !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num4Array) == that.jiesuan(res.data.num4Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
+            }else if(res.data.nub == 6){
+                if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num4Array)&& !that.jiesuanRan(that.data.num5Array) && !that.jiesuanRan(that.data.num7Array)&& !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num4Array) == that.jiesuan(res.data.num4Array) && that.jiesuan(that.data.num5Array) == that.jiesuan(res.data.num5Array)  && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
               }
             }else{
-               that.answerModal();
+                 if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.num3Array)&& !that.jiesuanRan(that.data.num4Array)&& !that.jiesuanRan(that.data.num5Array)&& !that.jiesuanRan(that.data.num6Array)&& !that.jiesuanRan(that.data.num7Array)&& !that.jiesuanRan(that.data.resultArray)) {
+                  if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num2Array) == that.jiesuan(res.data.num2Array) && that.jiesuan(that.data.num3Array) == that.jiesuan(res.data.num3Array) && that.jiesuan(that.data.num4Array) == that.jiesuan(res.data.num4Array) && that.jiesuan(that.data.num5Array) == that.jiesuan(res.data.num5Array) && that.jiesuan(that.data.num6Array) == that.jiesuan(res.data.num6Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array)&& that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
+                    that.addScore();
+                }else{
+                    that.modalcnt();
+                }
+              }else{
+                 that.answerModal();
+              }
             }
+           
             that.setData({
               score:that.data.score,
           })
