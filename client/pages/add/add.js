@@ -53,7 +53,7 @@ Page({
     that.setData({
     numArray: that.data.numArray,
     btnArray:[{"title":"重新开始"},{"title":"下一题"}],
-    score:0
+    score:0,
   })
       that.create(1);
   },
@@ -142,7 +142,7 @@ Page({
       var array6hide = "letf-tow-Group";
       var optarr1 = [num1,op,num7];
       var resultArray;
-      if (nub == 2) {
+     if (nub == 1 || nub == 2) {
         array2hide = "letf-tow-hide";
         array3hide = "letf-tow-hide";
         array4hide = "letf-tow-hide";
@@ -331,7 +331,7 @@ getJiesuanStorage:function(histor){
        wx.getStorage({
           key:histor,
           success: function(res) {
-            if (res.data.nub == 2) {
+            if (res.data.nub == 2 || res.data.nub == 1) {
                 if (!that.jiesuanRan(that.data.num1Array)  && !that.jiesuanRan(that.data.num7Array) && !that.jiesuanRan(that.data.resultArray)) {
                   if (that.jiesuan(that.data.num1Array) == that.jiesuan(res.data.num1Array) && that.jiesuan(that.data.num7Array) == that.jiesuan(res.data.num7Array) && that.jiesuan(that.data.resultArray) == that.jiesuan(res.data.resultArray)) {
                     that.addScore();
@@ -453,10 +453,14 @@ getJiesuanStorage:function(histor){
 addScore:function(){
         var that = this;
         that.data.score ++;
-         if (that.data.score > 10 && that.data.score <= 40) {
-            that.create(10);
-          }else if (that.data.score > 40) {
-            that.create(100);
+         if (that.data.score > 5 && that.data.score <= 5) {
+            that.create(3);
+          }else if (that.data.score > 10 && that.data.score <= 10) {
+            that.create(4);
+          }else if (that.data.score > 20 && that.data.score <= 20) {
+            that.create(5);
+          }else if (that.data.score > 20) {
+            that.create(6);
           }else{
             that.create(1);
           }
