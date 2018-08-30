@@ -57,18 +57,20 @@ page{
 }
 
 
-.item-btn-red{
+.item-btn-gray{
     width:40px;
     display:flex;
     align-items:center;
     flex-direction:column;
     justify-content:center;
     margin-top:1px;
-    margin-right:1px;
+    margin-letf:10px;
     border-style:solid;
-    border-color:red;
+    border-color:lightGray;
+    opacity:0;
     height:2rem;
 }
+
 
 .red{
     color:red;
@@ -82,13 +84,8 @@ page{
 
 .letf-one-Group{
     display:flex;
-    flex-direction: row;
-    flex:1;
-    width:100%;
-    height:2rem;
-    margin-top:5px;
-    margin-left:-30px;
-    justify-content:flex-end;
+    flex-direction:row;
+    width:80%;
 }
 
 .letf-tow-Group{
@@ -271,13 +268,19 @@ segview-hide{
 
 .opview{
     margin-top:-7px;
-    margin-left:120px;
     width:50rpx;
     color:black;
     font-weight:bold;
     font-size:52px;
     font-style:oblique;
     
+}
+
+.additionView{
+    margin-top:5px;
+    display:flex;
+    flex-direction:baseline;
+    width:100%;
 }
 
 .scoreopview{
@@ -289,12 +292,4 @@ segview-hide{
     font-size:30px;
 
 }
-
-.additionView{
-    margin-top:30px;
-    display:flex;
-    flex-direction:baseline;
-    width:100%;
-}
-
 

@@ -11,6 +11,7 @@ Page({
     id2:"2",
     id1:"1",
     id0:"0",
+    numoneArray:[{}],
     num1Array:[{}],
     num2Array:[{}],
     resultArray:[{}],
@@ -49,7 +50,7 @@ Page({
     btnArray:[{"title":"重新开始"},{"title":"下一题"}],
     score:0
   })
-      that.create(1);
+      that.create(10);
   },
 
   onReady:function(){
@@ -115,7 +116,7 @@ Page({
  
   create:function (nub) {
       var that = this;
-      var num1 = this.getRandomfirst(100);
+      var num1 = this.getRandomfirst(10);
       var num2 = this.getRandomsecond(nub);
       var op = this.getOperator(')');
       var opTemp = op;
@@ -171,6 +172,7 @@ Page({
     array2hide:array2hide,
     array3hide:array3hide, 
     segviewhide:segviewhide,
+    numoneArray:that.HiddenNubOddOne(num1Array),
     num1Array:that.HiddenNubOdd(num1Array),
     num2Array:that.HiddenNubEven(num2Array),
     Array0:that.HiddenNubOdd(Array0),
@@ -391,9 +393,26 @@ addScore:function(){
         })
 },
 
+HiddenNubOddOne:function(NubArray){
+      var lenteNubArray = NubArray.length+1;
+      var arrayNub = [];
+      var index = 0;
+      for (var i = 0; i < lenteNubArray; i++) {
+      var dictNub = {}; 
+      if (i%2==0) {
+        dictNub.ran =1;
+      }else{
+        dictNub.ran =0;
+      }
+      dictNub.nub = NubArray[i];
+      arrayNub.push(dictNub);
+    }
+    return  arrayNub;
+  },
+
+
 // 奇数
 HiddenNubOdd:function(NubArray){
-
       var arrayNub = [];
       var index = 0;
       for (var i = 0; i < NubArray.length; i++) {
