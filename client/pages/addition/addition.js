@@ -28,7 +28,8 @@ Page({
               { id: 6, name: '6' },
               { id: 7, name: '7' },
               { id: 8, name: '8' },
-              { id: 9, name: '9' }],
+              { id: 9, name: '9' },
+              { id: '.', name: '.' },],
     btnArray:[{}],
     Array0:[{}],
     Array1:[{}],
@@ -119,9 +120,9 @@ Page({
  
   create:function (nub) {
       var that = this;
-      var num1 = this.getRandomfirst(10);
-      var num2 = this.getRandomsecond(10);
-      var num3 = this.getRandomfirst(1);
+      var num1 = this.getRandomfirst(1000);
+      var num2 = this.getRandomsecond(1000);
+      var num3 = this.getRandomfirst(12);
       var num4 = this.getRandomsecond(10);
       var num5 = this.getRandomfirst(10);
       var num6 = this.getRandomsecond(10);
@@ -146,12 +147,11 @@ Page({
 
       var optarr = [num1,op,num3];
 
-      resultArray = that.decomposition((that.getResultsNub(optarr)));
+      resultArray = that.decomposition(Math.round((that.getResultsNub(optarr))*100)/100);
 
-      console.log(num1,num3,resultArray);
-      that.setHistorData('histor',op,num1Array,num2Array,num3Array,num4Array,num5Array,num6Array,resultArray);
-
-
+      console.log(num1,num3);
+      if (num1%num3==0) {
+        that.setHistorData('histor',op,num1Array,num2Array,num3Array,num4Array,num5Array,num6Array,resultArray);
 
       that.setData({
        op:op,
@@ -166,6 +166,9 @@ Page({
     num6Array:that.HiddenNubEven(num6Array),
     resultArray:that.HiddenNubEven(resultArray),
             })
+      }else{
+        that.create();
+      }
      
   },
 
