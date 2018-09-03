@@ -35,7 +35,6 @@ Page({
     score:0,
     opportunity:3,
     op:"",
-
     opsymbol:')',
   },
 
@@ -121,18 +120,31 @@ Page({
       var op = this.getOperator('÷');
       var opTemp = op;
 
+      
       if (num1%num2==0) {
 
       var num1Array = that.decomposition(num1);
-      var num2Array = that.decomposition(num2);  
+      var num2Array = that.decomposition(num2); 
+
       if (op === '÷') opTemp = '/';
 
       var optarr = [num1,op,num2];
-
       resultArray = that.decomposition(Math.round((that.getResultsNub(optarr))*100)/100);
 
-      that.setHistorData('histor',op,num1Array,num2Array,resultArray);
+      
+      var numCombined = that.resultArrayOdd(resultArray,num2);
+      var num3Array = that.decomposition(numCombined[0].nub);
+      
 
+      var optarrnum4 = [num1,'-',numCombined[0].nub];
+      var num4Array = that.getResultsNub(optarrnum4);
+      // console.log(awraw.substr(0,1));
+      // console.log(that.decomposition(numCombined[1].nub));
+      // console.log(that.decomposition(numCombined[2].nub));
+      // console.log(that.decomposition(numCombined[3].nub));
+      // console.log(that.decomposition(numCombined[4].nub));
+
+      that.setHistorData('histor',op,num1Array,num2Array,resultArray,num3Array,num4Array);
       that.setData({
        op:op,
     numoneArray:that.HiddenNubOddOne(num2Array,1),
@@ -140,6 +152,8 @@ Page({
     numtherrArray:that.HiddenNubOddOne(num2Array,2),
     num1Array:that.HiddenNubOdd(num1Array),
     num2Array:that.HiddenNubEven(num2Array),
+    num3Array:that.HiddenNubEven(num3Array),
+    num4Array:that.HiddenNubEven(num4Array),
     resultArray:that.HiddenNubEven(resultArray),
             })
       }else{
@@ -216,6 +230,8 @@ Page({
         numtherrArray:that.HiddenNubOddOne(num2Array,2),
             num1Array:res.data.num1Array,
             num2Array:res.data.num2Array,
+            num3Array:res.data.num3Array,
+            num4Array:res.data.num4Array,
             resultArray:res.data.resultArray,
                     })
               } 
@@ -223,7 +239,7 @@ Page({
   },
  
   //缓存历史数据
-  setHistorData:function(histor,op,num1Array,num2Array,resultArray){
+  setHistorData:function(histor,op,num1Array,num2Array,num3Array,num4Array,resultArray){
     var that = this;
     wx.setStorage({
         key: histor,
@@ -234,6 +250,8 @@ Page({
       numtherrArray:that.HiddenNubOddOne(num2Array,2),
           num1Array:that.HiddenNubOdd(num1Array),
           num2Array:that.HiddenNubEven(num2Array),
+          num3Array:that.HiddenNubEven(num3Array),
+          num4Array:that.HiddenNubEven(num4Array),
           resultArray:that.HiddenNubEven(resultArray)
         }
       })
@@ -350,6 +368,28 @@ addScore:function(){
           opportunity:3,
         })
 },
+
+resultArrayOdd:function(NubArray,num2){
+  var that = this;
+  var arrayNub = [];
+  var takeop = that.getOperator('×');
+  var takeopTemp = takeop;
+  if (takeop === '×') takeopTemp = '*';
+
+  for (var i = 0; i<NubArray.length; i++) {
+          var takeoparr = [NubArray[i],takeop,num2];
+          var oneArray = that.getResultsNub(takeoparr);
+          var dictNub = {}; 
+          dictNub.nub = oneArray;
+          arrayNub.push(dictNub);
+         
+      }
+
+       return arrayNub;
+},
+
+ 
+
 
 HiddenNubOddOne:function(NubArray,nub){
       var lenteNubArray = NubArray.length+nub;

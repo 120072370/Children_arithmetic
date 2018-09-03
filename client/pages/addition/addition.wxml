@@ -28,6 +28,16 @@
     </view>
 
 
+    <view class="additionView">
+     <text   class='item-btn-gray gray' wx:for="{{numoneArray}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+     <text  bindtap='num4Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red red":""}}' wx:for="{{num3Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+    </view>
+
+
+   <view class="additionView">
+     <text   class='item-btn-gray gray' wx:for="{{numoneArray}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+    <view class="segview"></view>
+   </view>
 
 
      <image class="widget__arrow" src="/image/dibu.png" mode="aspectFit"></image>
