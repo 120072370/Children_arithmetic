@@ -1,12 +1,12 @@
 
 {
   "pages": [
-    "pages/addition/addition",
-    
+    "pages/take/take",
     "pages/index/index",
+
+    "pages/addition/addition",
     "pages/reduction/reduction",
     "pages/add/add",
-    "pages/take/take",
     "pages/addCgi/addCgi"
     
 
@@ -26,3 +26,6 @@
     "uploadFile": 10000
   }
 }
+
+
+

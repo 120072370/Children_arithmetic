@@ -23,15 +23,15 @@
     </view>
 
     <view class='{{array4hide}}'>
-     <text  bindtap='num4Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red gray":""}}' wx:for="{{num4Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+     <text  bindtap='num4Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red red":""}}' wx:for="{{num4Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
     </view>
 
     <view class='{{array5hide}}'>
-     <text  bindtap='num5Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red gray":""}}' wx:for="{{num5Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+     <text  bindtap='num5Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red red":""}}' wx:for="{{num5Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
     </view>
 
     <view class='{{array6hide}}'>
-     <text  bindtap='num6Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red gray":""}}' wx:for="{{num6Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
+     <text  bindtap='num6Tap' class='item-btn-one blue {{item.ran ==1?"item-btn-red red":""}}' wx:for="{{num6Array}}" wx:for-index="index" wx:for-item="item" data-id='{{item.nub}}' data-ran='{{item.ran}}'  data-index="{{index}}" >{{item.nub}}</text>
     </view>
 
 

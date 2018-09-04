@@ -1,3 +1,5 @@
+var playMusic_js = require('../../utils/PlayMusic.js');
+
 
 Page({
     data:{
@@ -50,6 +52,7 @@ Page({
     score:0
   })
       that.create(1);
+
   },
 
   onReady:function(){
@@ -67,8 +70,10 @@ Page({
   },
 
 
+
   modalcnt:function(){
     var that = this;
+    playMusic_js.play(3);
     that.data.opportunity --;
     if (that.data.opportunity == 0 ) {
      wx.showModal({
@@ -83,6 +88,7 @@ Page({
             }
           })
     }else{
+    playMusic_js.play(4);
     wx.showModal({
       title: '提示',
       content: '答案错误,你还有'+ that.data.opportunity  +'机会',
@@ -109,6 +115,7 @@ Page({
     }else{    
         that.getJiesuanStorage("histor");
     }  
+
   },
   
  
@@ -184,30 +191,36 @@ Page({
 
  oneTap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num1Array");
   },
   oneTaptow:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num2Array");
   },
 
   oneTapresult:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"resultArray");
   },
 
   oneTaptowArray0:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"Array0");
   },
 
   oneTaptowArray1:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"Array1");
   },  
 
   oneTaptowArray2:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"Array2");
   },
 
@@ -287,9 +300,6 @@ getJiesuanStorage:function(histor){
           key:histor,
           success: function(res) {
 
-            console.log(res.data.num1Array);
-            console.log(that.data.num1Array);
-            
             if (that.data.num2Array.length == 1) {
 
           if (!that.jiesuanRan(that.data.num1Array) && !that.jiesuanRan(that.data.num2Array) && !that.jiesuanRan(that.data.Array0)){
@@ -362,6 +372,7 @@ getJiesuanStorage:function(histor){
 //选项卡
  parameterTap:function(e){
     var that=this;
+    playMusic_js.play(0);
     var this_checked = e.currentTarget.dataset.id;
     var changeNub = e.currentTarget.dataset.id;
     var numArrayList = that.data.numArray//获取Json数组
@@ -382,6 +393,7 @@ getJiesuanStorage:function(histor){
 //增加分数并且重置次数
 addScore:function(){
         var that = this;
+        playMusic_js.play(2);
         that.data.score ++;
          if (that.data.score > 10 && that.data.score <= 40) {
             that.create(10);

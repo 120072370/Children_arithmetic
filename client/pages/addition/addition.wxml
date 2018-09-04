@@ -39,6 +39,8 @@
     <view class="segview"></view>
    </view>
 
+   
+
 
      <image class="widget__arrow" src="/image/dibu.png" mode="aspectFit"></image>
       <view class="letf-btn-Group">
