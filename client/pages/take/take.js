@@ -1,5 +1,5 @@
 var playMusic_js = require('../../utils/PlayMusic.js');
-
+var playMusic_js1 = require('../../utils/PlayMusic1.js');
 
 Page({
     data:{
@@ -51,7 +51,7 @@ Page({
     btnArray:[{"title":"重新开始"},{"title":"下一题"}],
     score:0
   })
-      that.create(1);
+      that.create(10);
 
   },
 
@@ -73,12 +73,12 @@ Page({
 
   modalcnt:function(){
     var that = this;
-    playMusic_js.play(3);
     that.data.opportunity --;
     if (that.data.opportunity == 0 ) {
+    playMusic_js.play(4);
      wx.showModal({
       title: '提示',
-      content: '机会已经用完',
+      content: '游戏失败',
       success: function(res) {
             if (res.confirm) {
               that.resetdate();
@@ -88,7 +88,7 @@ Page({
             }
           })
     }else{
-    playMusic_js.play(4);
+    playMusic_js.play(3);
     wx.showModal({
       title: '提示',
       content: '答案错误,你还有'+ that.data.opportunity  +'机会',
@@ -240,8 +240,9 @@ Page({
 
   //重新开始重置数据
   resetdate:function(){
+    playMusic_js1.play(1);
     var that = this;
-    that.create(1);
+    that.create(10);
     that.setData({
           opportunity:3,
           score:0,
@@ -330,7 +331,8 @@ getJiesuanStorage:function(histor){
                 that.modalcnt();
             }
           }else{
-               that.answerModal();
+                 that.answerModal();
+               
           }
       }
             that.setData({
@@ -358,15 +360,6 @@ getJiesuanStorage:function(histor){
             jiesuan.push(str);
         }
         return jiesuan.includes(1);
-  },
-  //还没输入完整提示框
-  answerModal:function(){
-       wx.showModal({
-                title: '提示',
-                content: '请选择你的答案',
-                success: function(res) {
-                }
-            })
   },
  
 //选项卡
@@ -396,11 +389,11 @@ addScore:function(){
         playMusic_js.play(2);
         that.data.score ++;
          if (that.data.score > 10 && that.data.score <= 40) {
-            that.create(10);
-          }else if (that.data.score > 40) {
             that.create(100);
+          }else if (that.data.score > 40) {
+            that.create(1000);
           }else{
-            that.create(1);
+            that.create(10);
           }
           that.setData({
           opportunity:3,
@@ -465,7 +458,16 @@ HiddenNubEven:function(NubArray){
        }
        return result;
   },
-
+  //还没输入完整提示框
+  answerModal:function(){
+      playMusic_js1.play(0);
+       wx.showModal({
+                title: '提示',
+                content: '请选择你的答案',
+                success: function(res) {
+                }
+            })
+  },
   //随机生成0-2
   getRandomArrayElements:function(arr, count) {
     var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;

@@ -1,15 +1,15 @@
 
 {
   "pages": [
-    "pages/take/take",
     "pages/index/index",
-
     "pages/addition/addition",
     "pages/reduction/reduction",
+    
+    "pages/take/take",
     "pages/add/add",
+    
     "pages/addCgi/addCgi"
     
-
   ],
   "window": {
     "backgroundTextStyle": "dark",

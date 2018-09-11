@@ -1,3 +1,6 @@
+var playMusic_js = require('../../utils/PlayMusic.js');
+var playMusic_js1 = require('../../utils/PlayMusic1.js');
+
 
 Page({
     data:{
@@ -78,6 +81,7 @@ Page({
     var that = this;
     that.data.opportunity --;
     if (that.data.opportunity == 0 ) {
+    playMusic_js.play(4);
      wx.showModal({
       title: '提示',
       content: '机会已经用完',
@@ -91,7 +95,9 @@ Page({
           })
        
     }else{
+      playMusic_js.play(3);
     wx.showModal({
+
       title: '提示',
       content: '答案错误,你还有'+ that.data.opportunity  +'机会',
       success: function(res) {
@@ -211,38 +217,46 @@ Page({
 
  num1Tap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num1Array");
   },
   num2Tap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num2Array");
   },
 
   num3Tap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num3Array");
   },
 
   num4Tap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num4Array");
   },
 
   num5Tap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num5Array");
   },  
 
   num6Tap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num6Array");
   },
   num7Tap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"num7Array");
   },
   resultTap:function(e){
       var that = this;
+      playMusic_js.play(1);
       that.changeTap(e,"resultArray");
   },
 
@@ -262,6 +276,7 @@ Page({
 
   //重新开始重置数据
   resetdate:function(){
+    playMusic_js1.play(1);
     var that = this;
     that.create(1);
     that.setData({
@@ -422,6 +437,7 @@ getJiesuanStorage:function(histor){
   },
   //还没输入完整提示框
   answerModal:function(){
+    playMusic_js1.play(0);
        wx.showModal({
                 title: '提示',
                 content: '请选择你的答案',
@@ -432,6 +448,7 @@ getJiesuanStorage:function(histor){
  
 //选项卡
  parameterTap:function(e){
+   playMusic_js.play(0);
     var that=this;
     var this_checked = e.currentTarget.dataset.id;
     var changeNub = e.currentTarget.dataset.id;
@@ -452,6 +469,7 @@ getJiesuanStorage:function(histor){
 
 //增加分数并且重置次数
 addScore:function(){
+  playMusic_js.play(2);
         var that = this;
         that.data.score ++;
          if (that.data.score > 5 && that.data.score <= 5) {
